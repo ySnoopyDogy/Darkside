@@ -1,5 +1,6 @@
 import { Client, GatewayIntentBits } from "discord.js";
-import mainMessageCommand from "./commands/createMainMessage";
+import createQuestionMessage from "./commands/createQuestionMessage";
+import createWelcomeMessage from "./commands/createWelcomeMessage";
 import { executeInteractionCreate } from "./events/interactionCreate";
 
 const questionários = new Map();
@@ -21,7 +22,10 @@ client.on("messageCreate", (m) => {
   if (m.author.bot) return;
 
   if (m.content === "Criar Comandos" && m.author.id === process.env.OWNER) {
-    m.guild?.commands.set([mainMessageCommand.commandData]);
+    m.guild?.commands.set([
+      createQuestionMessage.commandData,
+      createWelcomeMessage.commandData,
+    ]);
     m.react("✅");
   }
 });

@@ -1,5 +1,6 @@
 import { ButtonInteraction } from "discord.js";
 import { questionários } from "..";
+import { sendAnswersEmbed } from "../executions/sendAnswersEmbed";
 import { executeFirstQuestion } from "../perguntas/first";
 import { executeQuartaQuestion } from "../perguntas/quarta";
 import { executeQuintaQuestion } from "../perguntas/quinta";
@@ -35,6 +36,8 @@ const manageQuestions = async (int: ButtonInteraction) => {
       return executeQuintaQuestion(int);
     case 5:
       return executeSextaQuestion(int);
+    case 6:
+      return sendAnswersEmbed(int, questionários.get(int.user.id).answers);
   }
 };
 
