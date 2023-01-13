@@ -1,4 +1,4 @@
-import { Interaction } from "discord.js";
+import { GuildMember, Interaction } from "discord.js";
 import createQuestionMessage from "../commands/createQuestionMessage";
 import createWelcomeMessage from "../commands/createWelcomeMessage";
 import { executeWelcomeRole } from "../executions/executeWelcomeRole";
@@ -8,16 +8,33 @@ import { manageQuestions } from "./startQuestions";
 
 const executeInteractionCreate = async (int: Interaction): Promise<void> => {
   if (int.isChatInputCommand()) {
-    if (int.commandName === "mensagem_registro")
-      return createQuestionMessage.execute(int);
+    if ((int.member as GuildMember).permissions.has("ManageGuild")) {
+      if (int.commandName === "mensagem_registro")
+        return createQuestionMessage.execute(int);
 
-    if (int.commandName === "mensagem_visitante")
-      return createWelcomeMessage.execute(int);
+      if (int.commandName === "mensagem_visitante")
+        return createWelcomeMessage.execute(int);
+    }
+
+    int.reply({
+      content: "Você não tem permissão para usar esse comando",
+      ephemeral: true,
+    });
+    return;
   }
 
   if (int.isButton()) {
     if (["VISITANTE", "ESPERA"].includes(int.customId))
       return executeWelcomeRole(int);
+
+    if ((int.member as GuildMember).roles.cache.size === 0) {
+      if (int.isRepliable())
+        int.reply({
+          ephemeral: true,
+          content:
+            "Você pegar escolher se é um visitante ou alguém na fila de espera para poder responder as questões",
+        });
+    }
 
     return manageQuestions(int);
   }

@@ -23,43 +23,46 @@ const sendAnswersEmbed = async (
     });
 
   const embed = new EmbedBuilder()
-    .setTitle(`Respostas de ${int.user.tag}`)
-    .setColor("Random")
+    .setColor("#01ed12")
     .setTimestamp()
-    .setAuthor({ name: int.user.tag, iconURL: int.user.displayAvatarURL() })
+    .setFooter({ text: `ID do Usuário: ${int.user.id}` })
+    .setAuthor({
+      name: `Respostas De ${int.user.tag}`,
+      iconURL: int.user.displayAvatarURL(),
+    })
     .addFields([
       {
-        name: "Você é um jogador CASUAL ou ATIVO?",
+        name: "1. Você é um jogador CASUAL ou ATIVO?",
         value: `${finalAnwers[0]}`,
-        inline: true,
+        inline: false,
       },
       {
-        name: "Você fica alguns dias sem jogar ou joga todos os dias?",
+        name: "2. Você fica alguns dias sem jogar ou joga todos os dias?",
         value: `${finalAnwers[1]}`,
-        inline: true,
+        inline: false,
       },
       {
-        name: "Você costuma entrar todos os dias ou não?",
+        name: "3. Você costuma entrar todos os dias ou não?",
         value: `${finalAnwers[2]}`,
-        inline: true,
+        inline: false,
       },
       {
-        name: "Quais plataformas você usa pra se comunicar? (Discord, Bando, Whatsapp, Nenhum)",
+        name: "4. Quais plataformas você usa pra se comunicar? (Discord, Bando, Whatsapp, Nenhum)",
         value: `${finalAnwers[3]}`,
-        inline: true,
+        inline: false,
       },
       {
-        name: "Você está ciente das contrbuições mínimas da guild?",
+        name: "5. Você está ciente das contrbuições mínimas da guild?",
         value: `${finalAnwers[4]}`,
-        inline: true,
+        inline: false,
       },
       {
-        name: "Qual é o seu FC e seu SUPRESSOR?",
+        name: "6. Qual é o seu FC e seu SUPRESSOR?",
         value: `${finalAnwers[5]}`,
-        inline: true,
+        inline: false,
       },
       {
-        name: "Você está na fila de espera para qual guilda?",
+        name: "7. Você está na fila de espera para qual guilda?",
         value:
           finalAnwers.length < 7
             ? "`Este usuário é apenas visitante`"
