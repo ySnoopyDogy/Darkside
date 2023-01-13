@@ -2,8 +2,9 @@
   "name": "darkside-bot",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc --project tsconfig.json",  
+    "build": "tsc --project tsconfig.json",
     "typecheck": " tsc --project tsconfig.json --noEmit",
+    "dev": "NODE_ENV=DEVELOPMENT node -r dotenv/config .",
     "start": "NODE_ENV=PRODUCTION node ."
   },
   "license": "MIT",
@@ -20,5 +21,8 @@
     "eslint-plugin-prettier": "^4.2.1",
     "prettier": "^2.8.2",
     "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "discord.js": "^14.7.1"
   }
 }

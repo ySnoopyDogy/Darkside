@@ -11,4 +11,4 @@ RUN yarn autoclean --force
 FROM node:18-alpine as bot
 COPY --from=build /app /app
 WORKDIR /app
-CMD ["yarn", "rest", "start"]
+CMD ["yarn", "start"]
