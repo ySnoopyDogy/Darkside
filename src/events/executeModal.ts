@@ -19,10 +19,11 @@ const executeModal = async (int: ModalSubmitInteraction): Promise<void> => {
 
   const fc = int.fields.getTextInputValue("FC");
   const supressor = int.fields.getTextInputValue("SUPRESSOR");
+  const username = int.fields.getTextInputValue("NAME");
 
   const finalAnwers = [
     ...oldAnswers.answers,
-    `FC: **${fc}**\nSUPRESSOR: **${supressor}**`,
+    `FC: ${fc}\nSUPRESSOR: ${supressor}\n${username}`,
   ];
 
   const userHasRole = (int.member as GuildMember).roles.cache.some((a) =>
