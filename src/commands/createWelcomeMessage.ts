@@ -37,7 +37,7 @@ const execute = async (int: ChatInputCommandInteraction): Promise<void> => {
   channel.send({
     components: [{ type: 1, components: [espera, visitante] }],
     content:
-      "Olá errante! Para receber acesso parcial ao servidor, clique no botão abaixo que se encaixe na sua situação. Visitantes são aqueles que entraram no servidor para conhecer, fila de espera são aqueles que estão na fila para entrar na GUILDA",
+      "🌟 **Olá errante** 🌟\n\n Para receber acesso parcial ao servidor, clique no botão abaixo que se encaixe na sua situação. Visitantes são aqueles que entraram no servidor para conhecer, fila de espera são aqueles que estão na fila para entrar na GUILDA",
   });
 
   int.reply({ content: "Mensagem criada", ephemeral: true });

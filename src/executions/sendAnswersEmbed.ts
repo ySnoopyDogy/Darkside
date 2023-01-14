@@ -35,37 +35,37 @@ const sendAnswersEmbed = async (
     .addFields([
       {
         name: "1. Nome dentro do jogo",
-        value: username,
+        value: `✅ ${username}`,
         inline: false,
       },
       {
         name: "2. Você é um jogador CASUAL ou ATIVO?",
-        value: `${finalAnwers[0]}`,
+        value: `✅ ${finalAnwers[0]}`,
         inline: false,
       },
       {
         name: "3. Você fica alguns dias sem jogar ou joga todos os dias?",
-        value: `${finalAnwers[1]}`,
+        value: `✅ ${finalAnwers[1]}`,
         inline: false,
       },
       {
         name: "4. Entra em call do discord com frequencia, ou não entra nunca?",
-        value: `${finalAnwers[2]}`,
+        value: `✅ ${finalAnwers[2]}`,
         inline: false,
       },
       {
         name: "5. Quais plataformas você usa pra se comunicar? (Discord, Bando, Whatsapp, Nenhum)",
-        value: `${finalAnwers[3]}`,
+        value: `✅ ${finalAnwers[3]}`,
         inline: false,
       },
       {
         name: "6. Você está ciente das contrbuições mínimas da guild?",
-        value: `${finalAnwers[4]}`,
+        value: `✅ ${finalAnwers[4]}`,
         inline: false,
       },
       {
         name: "7. Quanto está o seu FC e seu SUPRESSOR?",
-        value: `${fc}, ${supressor}`,
+        value: `✅ ${fc}, ${supressor}`,
         inline: false,
       },
       {
@@ -73,7 +73,7 @@ const sendAnswersEmbed = async (
         value:
           finalAnwers.length < 7
             ? "`Este usuário é apenas visitante`"
-            : `${finalAnwers[6]}`,
+            : `✅ ${finalAnwers[6]}`,
         inline: false,
       },
     ]);
@@ -84,7 +84,9 @@ const sendAnswersEmbed = async (
 
   if (finalAnwers.length < 7) finalAnwers[6] = "VISITANTE";
 
-  const answers = embed.data.fields?.map((a) => a.value).join(";");
+  const answers = embed.data.fields
+    ?.map((a) => a.value.replace("✅ ", ""))
+    .join(";");
 
   const finalMessage = `\`\`\`\n${answers}\n\`\`\``;
 

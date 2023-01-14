@@ -30,7 +30,7 @@ const execute = async (int: ChatInputCommandInteraction): Promise<void> => {
   channel.send({
     components: [{ type: 1, components: [button] }],
     content:
-      "Olá DarkSider! Para que nós possamos conhecer você melhor, clique no botão abaixo para responder algumas perguntinhas sobre como você joga Tower of Fantasy",
+      "💖 **Olá DarkSider** 💖\n\n Para que nós possamos conhecer você melhor, clique no botão abaixo para responder algumas perguntinhas sobre como você joga Tower of Fantasy",
   });
 
   int.reply({ content: "Mensagem criada", ephemeral: true });
