@@ -1,12 +1,8 @@
-import {
-  ButtonInteraction,
-  EmbedBuilder,
-  ModalSubmitInteraction,
-} from "discord.js";
+import { ButtonInteraction, EmbedBuilder } from "discord.js";
 import { questionários } from "..";
 
 const sendAnswersEmbed = async (
-  int: ButtonInteraction | ModalSubmitInteraction,
+  int: ButtonInteraction,
   finalAnwers: string[]
 ): Promise<void> => {
   questionários.delete(int.user.id);
@@ -15,11 +11,6 @@ const sendAnswersEmbed = async (
     int.update({
       content: `Perfeito! Obrigado pelas suas respostas. Agora um aviso. Explore os canais aqui do servidor, como o <#1041462096539435008>, o <#1014386658126340148> e o <#1023647511077998602>`,
       components: [],
-    });
-  else
-    int.reply({
-      ephemeral: true,
-      content: `Perfeito! Obrigado pelas suas respostas. Agora um aviso. Explore os canais aqui do servidor, como o <#1041462096539435008>, o <#1014386658126340148> e o <#1023647511077998602>`,
     });
 
   const [fc, supressor, username] = finalAnwers[5].split("\n");
@@ -69,11 +60,8 @@ const sendAnswersEmbed = async (
         inline: false,
       },
       {
-        name: "8. Você está na fila de espera para qual guilda?",
-        value:
-          finalAnwers.length < 7
-            ? "`Este usuário é apenas visitante`"
-            : `✅ ${finalAnwers[6]}`,
+        name: "8. Você está na fila de espera para alguma guilda?",
+        value: `✅ ${finalAnwers[6]}`,
         inline: false,
       },
     ]);

@@ -8,24 +8,13 @@ import { executeSecondQuestion } from "../perguntas/second";
 import { executeSextaQuestion } from "../perguntas/sexta";
 import { executeThirdQuestion } from "../perguntas/third";
 
-const manageQuestions = async (int: ButtonInteraction) => {
-  const oldAnswers = questionários.get(int.user.id);
-
-  if (!oldAnswers) {
-    questionários.set(int.user.id, {
-      level: 1,
-      answers: [],
-    });
-
-    return executeFirstQuestion(int);
-  }
-
-  questionários.set(int.user.id, {
-    level: oldAnswers.level + 1,
-    answers: [...oldAnswers.answers, int.customId],
-  });
-
-  switch (oldAnswers.level) {
+const makeQuestionBasedOnLevel = async (
+  int: ButtonInteraction,
+  level: number
+): Promise<void> => {
+  switch (level) {
+    case 0:
+      return executeFirstQuestion(int);
     case 1:
       return executeSecondQuestion(int);
     case 2:
@@ -39,6 +28,29 @@ const manageQuestions = async (int: ButtonInteraction) => {
     case 6:
       return sendAnswersEmbed(int, questionários.get(int.user.id).answers);
   }
+};
+
+const manageQuestions = async (int: ButtonInteraction) => {
+  const oldAnswers = questionários.get(int.user.id);
+
+  if (!oldAnswers || int.customId === "START") {
+    questionários.set(int.user.id, {
+      level: 1,
+      answers: [],
+    });
+
+    return executeFirstQuestion(int);
+  }
+
+  if (oldAnswers.level === 6 && int.customId === "OPEN_MODAL")
+    return executeSextaQuestion(int);
+
+  questionários.set(int.user.id, {
+    level: oldAnswers.level + 1,
+    answers: [...oldAnswers.answers, int.customId],
+  });
+
+  makeQuestionBasedOnLevel(int, oldAnswers.level);
 };
 
 export { manageQuestions };

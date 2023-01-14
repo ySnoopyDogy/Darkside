@@ -1,6 +1,8 @@
 import {
   ActionRowBuilder,
+  ButtonBuilder,
   ButtonInteraction,
+  ButtonStyle,
   ModalBuilder,
   TextInputBuilder,
   TextInputStyle,
@@ -41,7 +43,21 @@ const executeSextaQuestion = async (int: ButtonInteraction): Promise<void> => {
 
   await int.showModal(modal);
 
-  int.deleteReply();
+  int.editReply({
+    content:
+      "Caso você tenha fechado o formulário sem enviá-lo, clique no botão para o reabrir",
+    components: [
+      {
+        type: 1,
+        components: [
+          new ButtonBuilder()
+            .setCustomId("OPEN_MODAL")
+            .setLabel("Abrir o Formulário Novamente")
+            .setStyle(ButtonStyle.Secondary),
+        ],
+      },
+    ],
+  });
 };
 
 export { executeSextaQuestion };

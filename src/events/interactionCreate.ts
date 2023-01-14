@@ -32,7 +32,7 @@ const executeInteractionCreate = async (int: Interaction): Promise<void> => {
         int.reply({
           ephemeral: true,
           content:
-            "Você pegar escolher se é um visitante ou alguém na fila de espera para poder responder as questões",
+            "Antes de responder as questões, por favor escolha se você é um visitante ou alguém na fila de espera",
         });
     }
 

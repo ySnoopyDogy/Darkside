@@ -1,6 +1,5 @@
-import { GuildMember, ModalSubmitInteraction } from "discord.js";
+import { ModalSubmitInteraction } from "discord.js";
 import { questionários } from "..";
-import { sendAnswersEmbed } from "../executions/sendAnswersEmbed";
 import { executeFirstQuestion } from "../perguntas/first";
 import { executeSetimaQuestion } from "../perguntas/setima";
 
@@ -26,20 +25,12 @@ const executeModal = async (int: ModalSubmitInteraction): Promise<void> => {
     `FC: ${fc}\nSUPRESSOR: ${supressor}\n${username}`,
   ];
 
-  const userHasRole = (int.member as GuildMember).roles.cache.some((a) =>
-    a.name.toLowerCase().includes("espera")
-  );
+  questionários.set(int.user.id, {
+    level: 6,
+    answers: finalAnwers,
+  });
 
-  if (userHasRole) {
-    questionários.set(int.user.id, {
-      level: 6,
-      answers: finalAnwers,
-    });
-
-    return executeSetimaQuestion(int);
-  }
-
-  return sendAnswersEmbed(int, finalAnwers);
+  return executeSetimaQuestion(int);
 };
 
 export { executeModal };
