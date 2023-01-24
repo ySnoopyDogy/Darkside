@@ -29,15 +29,15 @@ const execute = async (int: ChatInputCommandInteraction): Promise<void> => {
     .setLabel("Sou Visitante")
     .setStyle(ButtonStyle.Primary);
 
-  const espera = new ButtonBuilder()
-    .setCustomId(`ESPERA`)
-    .setLabel("Estou na Fila de Espera")
+  const membro = new ButtonBuilder()
+    .setCustomId(`QUERO_MEMBRO`)
+    .setLabel("Quero Ser Um Membro")
     .setStyle(ButtonStyle.Primary);
 
   channel.send({
-    components: [{ type: 1, components: [espera, visitante] }],
+    components: [{ type: 1, components: [membro, visitante] }],
     content:
-      "🌟 **Olá errante** 🌟\n\n Para receber acesso parcial ao servidor, clique no botão abaixo que se encaixe na sua situação. Visitantes são aqueles que entraram no servidor para conhecer, fila de espera são aqueles que estão na fila para entrar na GUILDA",
+      "🌟 **Olá errante** 🌟\n\n Para receber acesso parcial ao servidor, clique no botão abaixo que se encaixe na sua situação. Visitantes são aqueles que entraram no servidor para conhecer. Caso queira ser um membro da guilda, responda as perguntas clicando no botão abaixo.",
   });
 
   int.reply({ content: "Mensagem criada", ephemeral: true });

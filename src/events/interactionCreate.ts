@@ -1,7 +1,8 @@
-import { GuildMember, Interaction } from "discord.js";
+import { ButtonInteraction, GuildMember, Interaction } from "discord.js";
 import createQuestionMessage from "../commands/createQuestionMessage";
 import createWelcomeMessage from "../commands/createWelcomeMessage";
 import { executeWelcomeRole } from "../executions/executeWelcomeRole";
+import { wantMember } from "../wantmember/wantMemberQuestions";
 import { executeModal } from "./executeModal";
 import { executeSelectMenu } from "./executeSelectMenu";
 import { manageQuestions } from "./startQuestions";
@@ -24,15 +25,16 @@ const executeInteractionCreate = async (int: Interaction): Promise<void> => {
   }
 
   if (int.isButton()) {
-    if (["VISITANTE", "ESPERA"].includes(int.customId))
-      return executeWelcomeRole(int);
+    if (int.customId === "VISITANTE") return executeWelcomeRole(int);
+
+    if (int.customId.startsWith("QUERO_MEMBRO")) return wantMember(int);
 
     if ((int.member as GuildMember).roles.cache.size === 0) {
       if (int.isRepliable())
         int.reply({
           ephemeral: true,
           content:
-            "Antes de responder as questões, por favor escolha se você é um visitante ou alguém na fila de espera",
+            "Antes de responder as questões, por favor diga-nos se você é apenas um visitante ou deseja ser um membro DARKSIDE.",
         });
     }
 
@@ -43,7 +45,11 @@ const executeInteractionCreate = async (int: Interaction): Promise<void> => {
     return executeSelectMenu(int);
   }
 
-  if (int.isModalSubmit()) return executeModal(int);
+  if (int.isModalSubmit()) {
+    if (int.customId.startsWith("QUERO_MEMBRO"))
+      return wantMember(int as unknown as ButtonInteraction);
+    return executeModal(int);
+  }
 };
 
 export { executeInteractionCreate };

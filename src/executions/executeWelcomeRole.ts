@@ -43,7 +43,7 @@ const executeWelcomeRole = async (int: ButtonInteraction): Promise<void> => {
   }
 
   int.reply({
-    content: "Bem-Vindo! Agora, responda algumas perguntas sobre você!",
+    content: "Bem-Vindo!",
     ephemeral: true,
   });
 };
