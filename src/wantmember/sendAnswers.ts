@@ -5,7 +5,7 @@ const sendWantedAnswers = async (
 ): Promise<void> => {
   int.reply({
     ephemeral: true,
-    content: `Perfeito! Obrigado pelas suas respostas. Agora um aviso. Explore os canais aqui do servidor, como o <#1041462096539435008>, o <#1014386658126340148> e o <#1023647511077998602>`,
+    content: `Perfeito, obrigado pelas suas respostas. Entraremos em contato o mais rápido possível! <3`,
     components: [],
   });
 
