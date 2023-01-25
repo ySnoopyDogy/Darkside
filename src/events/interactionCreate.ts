@@ -1,7 +1,6 @@
 import { ButtonInteraction, GuildMember, Interaction } from "discord.js";
 import createQuestionMessage from "../commands/createQuestionMessage";
 import createWelcomeMessage from "../commands/createWelcomeMessage";
-import { executeWelcomeRole } from "../executions/executeWelcomeRole";
 import { wantMember } from "../wantmember/wantMemberQuestions";
 import { executeModal } from "./executeModal";
 import { executeSelectMenu } from "./executeSelectMenu";
@@ -25,8 +24,6 @@ const executeInteractionCreate = async (int: Interaction): Promise<void> => {
   }
 
   if (int.isButton()) {
-    if (int.customId === "VISITANTE") return executeWelcomeRole(int);
-
     if (int.customId.startsWith("QUERO_MEMBRO")) return wantMember(int);
 
     if ((int.member as GuildMember).roles.cache.size === 0) {
