@@ -1,4 +1,5 @@
 import { Client, GatewayIntentBits } from "discord.js";
+import createJustifyMessage from "./commands/createJustifyMessage";
 import createQuestionMessage from "./commands/createQuestionMessage";
 import createWelcomeMessage from "./commands/createWelcomeMessage";
 import { executeInteractionCreate } from "./events/interactionCreate";
@@ -25,6 +26,7 @@ client.on("messageCreate", (m) => {
     m.guild?.commands.set([
       createQuestionMessage.commandData,
       createWelcomeMessage.commandData,
+      createJustifyMessage.commandData,
     ]);
     m.react("✅");
   }
